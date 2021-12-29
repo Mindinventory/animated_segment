@@ -27,7 +27,7 @@ This package will animates a segment. Package provides you a modern animated fan
 
 
 ### Animated Segment
-![Animated Segment](https://github.com/Mindinventory/animated_segment/blob/master/assets/animated_segment.gif)
+![Animated Segment](https://github.com/mi-ghanshyam/animated_segment/blob/master/assets/animated_segment.gif)
 
 
 ## Usage
