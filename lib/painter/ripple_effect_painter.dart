@@ -1,5 +1,7 @@
 part of animated_segment;
 
+/// [RippleEffectPainter] class create a ripple effect on tap of segment.
+/// This class uses a [CustomPainter] to draw a ripple effect.
 class RippleEffectPainter extends CustomPainter {
   RippleEffectPainter({
     required this.animation,
@@ -9,9 +11,10 @@ class RippleEffectPainter extends CustomPainter {
   final Color color;
   final Animation<double> animation;
 
+  /// [circle] drawing circle for the ripple effect.
   void circle(Canvas canvas, Rect rect, double value) {
-    final double opacity = (1.0 - (value / 4.0)).clamp(0.0, 1.0);
-    final Color _color = color.withOpacity(opacity);
+    final Color _color = color.withOpacity(_calculateOpacity(value));
+    // Here, we are calculating size by dividing width/2.
     final double size = rect.width / 2;
     final double area = size * size;
     final double radius = math.sqrt(area * value / 4);
@@ -29,4 +32,7 @@ class RippleEffectPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+
+  /// [_calculateOpacity] method calculates a opacity of ripple effect.
+  double _calculateOpacity(double value) => (1.0 - (value / 4.0)).clamp(0.0, 1.0);
 }
