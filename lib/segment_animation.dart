@@ -26,11 +26,28 @@ part 'widgets/item_ripple.dart';
 part 'widgets/segment_items.dart';
 
 class AnimatedSegment extends StatefulWidget {
-  const AnimatedSegment({required this.segmentNames, this.backgroundColor = AppColors.bgColor, this.segmentTextColor = AppColors.primary, this.selectedSegmentColor = AppColors.white, this.rippleEffectColor = AppColors.white, Key? key}) : super(key: key);
+  const AnimatedSegment(
+      {required this.segmentNames,
+      this.backgroundColor = AppColors.bgColor,
+      this.segmentTextColor = AppColors.primary,
+      this.selectedSegmentColor = AppColors.white,
+      this.rippleEffectColor = AppColors.white,
+      Key? key})
+      : super(key: key);
+
+  /// [segmentNames] property takes List<String> as a parameter and segmentNames is useful to display items in segment.
   final List<String> segmentNames;
+
+  /// [backgroundColor] property takes Color value as a parameter. You can change the background color of animated segment. default value is `Color(0xff8AADFB)`
   final Color backgroundColor;
+
+  /// [segmentTextColor] property takes Color value as a parameter. You can change the text color of segmented text color. default value is `Color(0xff0217FD)`
   final Color segmentTextColor;
+
+  /// [rippleEffectColor] property takes Color value as a parameter. You can change the ripple color of segment. default value is `Colors.white`
   final Color rippleEffectColor;
+
+  /// [selectedSegmentColor] property takes Color value as a parameter. You can change the selected segment color of animated segment. default value is `Colors.white`
   final Color selectedSegmentColor;
 
   @override
@@ -38,14 +55,32 @@ class AnimatedSegment extends StatefulWidget {
 }
 
 class _AnimatedSegmentState extends State<AnimatedSegment> {
+
+  /// [_deviceSize] is use to get device width and height.
   late Size _deviceSize;
+
+  /// [_refreshAnimatedContainer] property will update the animation when value notifier will updates.
   final ValueNotifier<bool> _refreshAnimatedContainer = ValueNotifier(false);
+
+  /// [_showRippleEffect] property shows a ripple effect when on tap performs on segments.
   final ValueNotifier<bool> _showRippleEffect = ValueNotifier(false);
+
+  /// [_animatedContainerWidth] property calculates the width of animation.
   double _animatedContainerWidth = 0;
+
+  /// [_animatedContainerLeftMargin] property calculates the left margin after animation.
   double _animatedContainerLeftMargin = 0;
+
+  /// [_eventBus] property is use to send or listen the events.
   late EventBus _eventBus;
+
+  /// [_updateOnEndComplete] property will check is any update to perform once animation is end.
   bool _updateOnEndComplete = false;
+
+  /// [_lasIndex] property stores last animated segment position.
   int _lasIndex = 0;
+
+  /// [_currentIndex] property stores current animated segment position.
   int _currentIndex = 0;
 
   @override
@@ -64,7 +99,8 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Dimens.paddingNormal, horizontal: Dimens.paddingNormal),
+      padding: const EdgeInsets.symmetric(
+          vertical: Dimens.paddingNormal, horizontal: Dimens.paddingNormal),
       child: TweenAnimationBuilder(
         tween: Tween<double>(begin: 0, end: 1),
         builder: (context, double value, child) {
@@ -113,7 +149,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
                 widgets: widget.segmentNames,
                 width: _deviceSize.width - Dimens.paddingLarge,
                 height: Dimens.heightNormal,
-                textColor: widget.segmentTextColor,
+                segmentTextColor: widget.segmentTextColor,
                 eventBus: _eventBus,
                 onEndRenderItems: _animateInitial,
               ),
@@ -177,13 +213,15 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   }
 
   /// [_updateContainerMargin] In this method we are changing the margin of AnimatedContainer.
-  /// 1st Usecase: This is needed because first we are adding the width by multiply 2 so after animation completes whenever animation is in forward direction, this will execute and removes the width.
+  /// 1st Use Case: This is needed because first we are adding the width by multiply 2 so after animation completes whenever animation is in forward direction, this will execute and removes the width.
   /// Forward direction: 0 tab to 1 tab.
-  /// 2nd Usecase: 1st usecase but we are doing this before adding the width by multiply by 2.
+  /// 2nd Use Case: 1st use case but we are doing this before adding the width by multiply by 2.
   void _updateContainerMargin() {
     _animatedContainerLeftMargin = _getContainerMargin();
   }
 
+  /// [_getContainerWidth] we are calculating the container width.
+  /// Calculation is based on forward or backward animation
   double _getContainerWidth() {
     if (_currentIndex < _lasIndex) {
       return _widgetSize * ((_currentIndex - (_lasIndex + 1)).abs());
@@ -191,6 +229,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
     return _widgetSize * (((_currentIndex + 1) - _lasIndex).abs());
   }
 
+  /// [_getContainerMargin] we are calculating the margin from left side.
   double _getContainerMargin() {
     return (_widgetSize * (_currentIndex + 1)) - _widgetSize;
   }

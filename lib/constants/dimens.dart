@@ -1,5 +1,7 @@
 part of animated_segment;
 
+/// [Dimens] class have all the static and const members.
+/// Here, we have defined used dimensions inside the package.
 class Dimens {
   // Padding
   static const paddingSmall = 4.0;
