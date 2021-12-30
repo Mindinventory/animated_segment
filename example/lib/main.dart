@@ -34,11 +34,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         alignment: Alignment.center,
         color: AppColors.white,
         child: const AnimatedSegment(
-          list: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
+          segmentNames: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
           backgroundColor: AppColors.bgColor,
-          textColor: AppColors.white,
+          segmentTextColor: AppColors.white,
           rippleEffectColor: AppColors.primary,
-          selectedColor: AppColors.primary,
+          selectedSegmentColor: AppColors.primary,
         ),
       ),
     );

@@ -27,42 +27,39 @@ This package will animates a segment. Package provides you a modern animated fan
 
 
 ### Animated Segment
-![Animated Segment](https://github.com/mi-ghanshyam/animated_segment/blob/master/assets/animated_segment.gif)
+![Animated Segment](https://github.com/Mindinventory/animated_segment/blob/master/assets/animated_segment.gif)
 
 
 ## Usage
 
 ### Example
     AnimatedSegment(
-      list: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
+      segmentNames: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
       backgroundColor: AppColors.bgColor,
-      textColor: AppColors.white,
+      segmentTextColor: AppColors.white,
       rippleEffectColor: AppColors.primary,
-      selectedColor: AppColors.primary,
+      selectedSegmentColor: AppColors.primary,
     );
 
 ### Required parameters
 
-##### list:
-This property takes List<String> as a parameter and list is useful to display items in segment.
+##### segmentNames:
+This property takes List<String> as a parameter and segmentNames is useful to display items in segment.
 
-## Optional parameters
+### Optional parameters
 
 ##### backgroundColor:
 This property takes Color value as a parameter. You can change the background color of animated segment. default value is `Color(0xff8AADFB)`
 
-##### textColor:
+##### segmentTextColor:
 This property takes Color value as a parameter. You can change the text color of segmented text color. default value is `Color(0xff0217FD)`
 
 ##### rippleEffectColor:
 This property takes Color value as a parameter. You can change the ripple color of segment. default value is `Colors.white`
 
-##### selectedColor:
+##### selectedSegmentColor:
 This property takes Color value as a parameter. You can change the selected segment color of animated segment. default value is `Colors.white`
 
-
-## Note:
-The result returns in Uint8List. so it can be lost later, you are responsible for storing it somewhere permanent (if needed).
 
 ## Guideline for contributors
 Contribution towards our repository is always welcome, we request contributors to create a pull request to the develop branch only.

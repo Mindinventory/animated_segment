@@ -26,12 +26,12 @@ part 'widgets/item_ripple.dart';
 part 'widgets/segment_items.dart';
 
 class AnimatedSegment extends StatefulWidget {
-  const AnimatedSegment({required this.list, this.backgroundColor = AppColors.bgColor, this.textColor = AppColors.primary, this.selectedColor = AppColors.white, this.rippleEffectColor = AppColors.white, Key? key}) : super(key: key);
-  final List<String> list;
+  const AnimatedSegment({required this.segmentNames, this.backgroundColor = AppColors.bgColor, this.segmentTextColor = AppColors.primary, this.selectedSegmentColor = AppColors.white, this.rippleEffectColor = AppColors.white, Key? key}) : super(key: key);
+  final List<String> segmentNames;
   final Color backgroundColor;
-  final Color textColor;
+  final Color segmentTextColor;
   final Color rippleEffectColor;
-  final Color selectedColor;
+  final Color selectedSegmentColor;
 
   @override
   _AnimatedSegmentState createState() => _AnimatedSegmentState();
@@ -103,17 +103,17 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
                       width: _animatedContainerWidth,
                       height: Dimens.heightSmall,
                       leftMargin: _animatedContainerLeftMargin,
-                      color: widget.selectedColor,
+                      color: widget.selectedSegmentColor,
                       onEndComplete: _onEndCallback,
                     );
                   },
                 ),
               ),
               SegmentItems(
-                widgets: widget.list,
+                widgets: widget.segmentNames,
                 width: _deviceSize.width - Dimens.paddingLarge,
                 height: Dimens.heightNormal,
-                textColor: widget.textColor,
+                textColor: widget.segmentTextColor,
                 eventBus: _eventBus,
                 onEndRenderItems: _animateInitial,
               ),
