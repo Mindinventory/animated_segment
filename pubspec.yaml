@@ -1,6 +1,6 @@
 name: animated_segment
 description: Package provides you a modern animated fancy segment. Show selection of tab using elastic way animation.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/Mindinventory/animated_segment
 
 environment:

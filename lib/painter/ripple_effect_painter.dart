@@ -34,5 +34,6 @@ class RippleEffectPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 
   /// [_calculateOpacity] method calculates a opacity of ripple effect.
-  double _calculateOpacity(double value) => (1.0 - (value / 4.0)).clamp(0.0, 1.0);
+  double _calculateOpacity(double value) =>
+      (1.0 - (value / 4.0)).clamp(0.0, 1.0);
 }

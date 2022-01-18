@@ -28,14 +28,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  final List<String> _listOfSegments = [
+    Strings.tab_1,
+    Strings.tab_2,
+    Strings.tab_3,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
         color: AppColors.white,
-        child: const AnimatedSegment(
-          segmentNames: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
+        child: AnimatedSegment(
+          segmentNames: _listOfSegments,
+          onSegmentChanged: (index) {
+            print('Selected Segment is: ${_listOfSegments[index]}');
+          },
           backgroundColor: AppColors.bgColor,
           segmentTextColor: AppColors.white,
           rippleEffectColor: AppColors.primary,
