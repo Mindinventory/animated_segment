@@ -35,6 +35,9 @@ This package will animates a segment. Package provides you a modern animated fan
 ### Example
     AnimatedSegment(
       segmentNames: [Strings.tab_1, Strings.tab_2, Strings.tab_3],
+      onSegmentChanged: (index) {
+        print('Selected Segment Index is: $index');
+      },
       backgroundColor: AppColors.bgColor,
       segmentTextColor: AppColors.white,
       rippleEffectColor: AppColors.primary,
@@ -45,6 +48,9 @@ This package will animates a segment. Package provides you a modern animated fan
 
 ##### segmentNames:
 This property takes List<String> as a parameter and segmentNames is useful to display items in segment.
+
+##### onSegmentChanged:
+Call back called when the user select the new segment and return the selected segment index. Index for the initial selected segment is `0`.
 
 ### Optional parameters
 

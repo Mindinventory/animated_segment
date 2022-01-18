@@ -28,6 +28,7 @@ part 'widgets/segment_items.dart';
 class AnimatedSegment extends StatefulWidget {
   const AnimatedSegment(
       {required this.segmentNames,
+      required this.onSegmentChanged,
       this.backgroundColor = AppColors.bgColor,
       this.segmentTextColor = AppColors.primary,
       this.selectedSegmentColor = AppColors.white,
@@ -37,6 +38,10 @@ class AnimatedSegment extends StatefulWidget {
 
   /// [segmentNames] property takes List<String> as a parameter and segmentNames is useful to display items in segment.
   final List<String> segmentNames;
+
+  /// [onSegmentChanged] Call back called when the user select the new segment and return the selected segment index.
+  /// Index for the initial selected segment is [0].
+  final ValueChanged<int> onSegmentChanged;
 
   /// [backgroundColor] property takes Color value as a parameter. You can change the background color of animated segment. default value is `Color(0xff8AADFB)`
   final Color backgroundColor;
@@ -55,7 +60,6 @@ class AnimatedSegment extends StatefulWidget {
 }
 
 class _AnimatedSegmentState extends State<AnimatedSegment> {
-
   /// [_deviceSize] is use to get device width and height.
   late Size _deviceSize;
 
@@ -174,6 +178,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
       _animatedContainerWidth = _widgetSize;
       _updateScreen();
       _lasIndex = _currentIndex;
+      widget.onSegmentChanged(_lasIndex);
     }
   }
 
