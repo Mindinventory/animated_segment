@@ -33,6 +33,7 @@ class AnimatedSegment extends StatefulWidget {
       this.segmentTextColor = AppColors.primary,
       this.selectedSegmentColor = AppColors.white,
       this.rippleEffectColor = AppColors.white,
+      this.currentIndex = 0,
       Key? key})
       : super(key: key);
 
@@ -54,6 +55,9 @@ class AnimatedSegment extends StatefulWidget {
 
   /// [selectedSegmentColor] property takes Color value as a parameter. You can change the selected segment color of animated segment. default value is `Colors.white`
   final Color selectedSegmentColor;
+
+  /// [currentIndex] property is use to set initial index of animated segment.
+  final int? currentIndex;
 
   @override
   _AnimatedSegmentState createState() => _AnimatedSegmentState();
@@ -89,8 +93,9 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
 
   @override
   void initState() {
-    _initializeEventBus();
     super.initState();
+    _initializeEventBus();
+    _setInitialSelection();
   }
 
   /// [_deviceSize] Here we are calculating the device size.
@@ -195,6 +200,18 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   void _initializeEventBus() {
     _eventBus = EventBusImpl();
     _eventBus.stream.listen(_listenEvent);
+  }
+
+  /// [_setInitialSelection] Here we set initial selection of segment.
+  void _setInitialSelection() {
+    _currentIndex = ((widget.currentIndex != null) && ((widget.currentIndex ?? 0) >= 0)) ? (widget.currentIndex ?? 0) : 0;
+    if (_currentIndex < widget.segmentNames.length) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        _lasIndex = _currentIndex;
+        _updateContainerMargin();
+        _showRippleEffect.value = true;
+      });
+    }
   }
 
   /// [_listenEvent] On tap of item this method will be execute and performs the animation.

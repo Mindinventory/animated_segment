@@ -42,6 +42,7 @@ This package will animates a segment. Package provides you a modern animated fan
       segmentTextColor: AppColors.white,
       rippleEffectColor: AppColors.primary,
       selectedSegmentColor: AppColors.primary,
+      currentIndex: 1,
     );
 
 ### Required parameters
@@ -65,6 +66,9 @@ This property takes Color value as a parameter. You can change the ripple color 
 
 ##### selectedSegmentColor:
 This property takes Color value as a parameter. You can change the selected segment color of animated segment. default value is `Colors.white`
+
+##### currentIndex:
+This property will allow you set initial index of animated segment. default value is `0`
 
 
 ## Guideline for contributors

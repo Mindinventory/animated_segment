@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           segmentTextColor: AppColors.white,
           rippleEffectColor: AppColors.primary,
           selectedSegmentColor: AppColors.primary,
+          currentIndex: 1,
         ),
       ),
     );
