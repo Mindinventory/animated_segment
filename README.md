@@ -54,6 +54,9 @@ Call back called when the user select the new segment and return the selected se
 
 ### Optional parameters
 
+##### initialSegment:
+This property takes int value as a parameter. This is use to set the initial segment from [segmentNames].
+
 ##### backgroundColor:
 This property takes Color value as a parameter. You can change the background color of animated segment. default value is `Color(0xff8AADFB)`
 

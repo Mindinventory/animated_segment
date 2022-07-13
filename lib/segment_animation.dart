@@ -26,15 +26,16 @@ part 'widgets/item_ripple.dart';
 part 'widgets/segment_items.dart';
 
 class AnimatedSegment extends StatefulWidget {
-  const AnimatedSegment(
-      {required this.segmentNames,
-      required this.onSegmentChanged,
-      this.backgroundColor = AppColors.bgColor,
-      this.segmentTextColor = AppColors.primary,
-      this.selectedSegmentColor = AppColors.white,
-      this.rippleEffectColor = AppColors.white,
-      Key? key})
-      : super(key: key);
+  const AnimatedSegment({
+    required this.segmentNames,
+    required this.onSegmentChanged,
+    this.initialSegment,
+    this.backgroundColor = AppColors.bgColor,
+    this.segmentTextColor = AppColors.primary,
+    this.selectedSegmentColor = AppColors.white,
+    this.rippleEffectColor = AppColors.white,
+    Key? key,
+  }) : super(key: key);
 
   /// [segmentNames] property takes List<String> as a parameter and segmentNames is useful to display items in segment.
   final List<String> segmentNames;
@@ -54,6 +55,9 @@ class AnimatedSegment extends StatefulWidget {
 
   /// [selectedSegmentColor] property takes Color value as a parameter. You can change the selected segment color of animated segment. default value is `Colors.white`
   final Color selectedSegmentColor;
+
+  /// [initialSegment] property takes int value as a parameter. This is use to set the initial segment from [segmentNames].
+  final int? initialSegment;
 
   @override
   _AnimatedSegmentState createState() => _AnimatedSegmentState();
@@ -90,6 +94,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   @override
   void initState() {
     _initializeEventBus();
+    _setDefaultIndexInSegments();
     super.initState();
   }
 
@@ -103,8 +108,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: Dimens.paddingNormal, horizontal: Dimens.paddingNormal),
+      padding: const EdgeInsets.symmetric(vertical: Dimens.paddingNormal, horizontal: Dimens.paddingNormal),
       child: TweenAnimationBuilder(
         tween: Tween<double>(begin: 0, end: 1),
         builder: (context, double value, child) {
@@ -185,7 +189,7 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   /// [_animateInitial] when build is complete then this will calls.
   /// We are setting up the 1st item animation.
   void _animateInitial() {
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _animatedContainerWidth = _widgetSize;
       _refreshAnimatedContainer.value = !_refreshAnimatedContainer.value;
     });
@@ -237,5 +241,15 @@ class _AnimatedSegmentState extends State<AnimatedSegment> {
   /// [_getContainerMargin] we are calculating the margin from left side.
   double _getContainerMargin() {
     return (_widgetSize * (_currentIndex + 1)) - _widgetSize;
+  }
+
+  void _setDefaultIndexInSegments() {
+    if (widget.initialSegment != null) {
+      if (widget.initialSegment! < widget.segmentNames.length) {
+        _eventBus.sendEvent(ItemClickBusEvent(index: widget.initialSegment!));
+      } else {
+        throw Exception('initialSegment must be a smaller than list length.');
+      }
+    }
   }
 }
